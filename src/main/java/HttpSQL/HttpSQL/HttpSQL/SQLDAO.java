@@ -18,7 +18,7 @@ public class SQLDAO {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/BOOKMANAGER");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/BOOKMANAGER?useUnicode=true&characterEncoding=utf-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("1515");
 
