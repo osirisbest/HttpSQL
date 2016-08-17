@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html>
 <head>
 	<title>Home</title>
@@ -9,6 +11,14 @@
 <h1>
 	Список всех книг  
 </h1>
+
+<form:form modelAttribute="book" action="save" method="POST">
+
+<form:input path="title"/>
+<form:input path="author"/>
+<form:input path="price"/>
+<input type="submit">
+</form:form>
 
 <table>
 

@@ -41,7 +41,7 @@ public class SQLDAO {
 
 	public List<book> getAll() {
 
-		String sql = "select * from `bookmanager`.`books`";
+		String sql = "select * from `bookmanager`.`books` order by ID DESC";
 		List list = jdbcTemplate.queryForList(sql);
 
 		List<book> booklist = new ArrayList<book>();
