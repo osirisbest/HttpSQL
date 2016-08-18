@@ -7,9 +7,8 @@
 <h1>
 	Менеджер книг  
 </h1>
+
 <a href="getall">Увидеть все</a><pre>
-<a href="delall">Удалить все</a><pre>
-<a href="putsql">Протестировать</a><pre>
 
 <p>  The time on the server is ${serverTime}. </p>
 

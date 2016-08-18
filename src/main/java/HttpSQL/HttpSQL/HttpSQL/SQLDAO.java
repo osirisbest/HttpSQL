@@ -1,16 +1,20 @@
 package HttpSQL.HttpSQL.HttpSQL;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class SQLDAO {
 	private static SQLDAO mapper = new SQLDAO();
 
 	private static JdbcTemplate jdbcTemplate;
+	private String sql;
 	// private MapSqlParameterSource parametr = new MapSqlParameterSource();
 
 	SQLDAO() {
@@ -28,9 +32,26 @@ public class SQLDAO {
 		return mapper;
 	}
 
-	public void test() {
-		String sql = "INSERT INTO `bookmanager`.`books` (`BOOK_TITLE`, `BOOK_AUTHOR`, `BOOK_PRICE`) VALUES ('test', 'autor', '34');";
-		jdbcTemplate.execute(sql);
+	public book getBookByID(int ID) {
+		sql = "select * from bookmanager.books where id=?";
+		RowMapper<book> rowMapper = new RowMapper<book>() {
+
+			@Override
+			public book mapRow(ResultSet rs, int rowNum) throws SQLException {
+				book book = new book();
+				book.setId(rs.getInt("ID"));
+				book.setTitle(rs.getString("BOOK_TITLE"));
+				book.setAuthor(rs.getString("BOOK_AUTHOR"));
+				book.setPrice(rs.getString("BOOK_PRICE"));
+				return book;
+			}
+		};
+		return jdbcTemplate.queryForObject(sql, new Object[] { ID }, rowMapper);
+	}
+
+	public void update(book book) {
+		String sql = "update bookmanager.books SET BOOK_TITLE=?,BOOK_AUTHOR=?,BOOK_PRICE=? WHERE id=?";
+		jdbcTemplate.update(sql, new Object[] { book.getTitle(), book.getAuthor(), book.getPrice(), book.getId() });
 	}
 
 	public void delete(int ID) {

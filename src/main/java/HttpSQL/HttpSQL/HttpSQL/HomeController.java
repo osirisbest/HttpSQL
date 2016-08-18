@@ -47,15 +47,15 @@ public class HomeController {
 	// @ResponseBody
 	public String putsql() {
 
-		dao.test();
-		dao.insert("title", "author", "price");
-		dao.getAll();
+		// dao.test();
+		// dao.insert("title", "author", "price");
+		// dao.getAll();
 		return "redirect:/getall";
 	}
 
 	@RequestMapping(value = "/getall")
 	public ModelAndView getAll() {
-
+		mv.clear();
 		mv.setViewName("getall");
 		mv.addObject("list", dao.getAll());
 		mv.addObject("book", new book());
@@ -69,17 +69,27 @@ public class HomeController {
 		return "redirect:/getall";
 	}
 
-	@RequestMapping(value = "/edit/{x}")
+	@RequestMapping(value = "/edit/{ID}")
 	@ResponseBody
-	public String edit() {
+	public ModelAndView edit(@PathVariable("ID") Integer ID) {
+		book book = dao.getBookByID(ID);
+		mv.clear();
+		mv.setViewName("edit");
 
-		return "edit TODO!";
+		mv.addObject("book", book);
+		return mv;
 	}
 
 	@RequestMapping(value = "/del/{ID}")
 	// @ResponseBody
 	public String del(@PathVariable("ID") Integer ID) {
 		dao.delete(ID);
+		return "redirect:/getall";
+	}
+
+	@RequestMapping(value = "/edit/update")
+	public String update(@ModelAttribute("book") book book) {
+		dao.update(book);
 		return "redirect:/getall";
 	}
 
