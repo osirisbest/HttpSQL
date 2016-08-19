@@ -11,7 +11,7 @@
 
 
 <form:form modelAttribute="book" action="update">
-<form:input path="id" />
+<form:input path="id" readonly="true" />
 <form:input path="title"/>
 <form:input path="author"/>
 <form:input path="price"/>
