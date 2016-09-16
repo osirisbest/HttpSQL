@@ -7,24 +7,26 @@
 	<title>Home</title>
 </head>
 <body>
-
+<script type="text/javascript">
+	//alert("Hi!");
+</script>
 <h1>
 	Список всех книг  
 </h1>
 
 <form:form modelAttribute="book" action="save" method="POST">
 
-<form:input path="title"/>
+<form:input path="title" style="width:1000"/>
 <form:input path="author"/>
 <form:input path="price"/>
-<input type="submit">
+<input type="submit" name="Записать" VALUE="Записать книгу в базу данных">
 </form:form>
 
-<table>
+<table width="100%" border="1" align="center" cellpadding="4" cellspacing="0">
 
 <tr><th>ID</th>
-	<th>Название</th>
-	<th>Автор</th>
+	<th>Название/Ссылка</th>
+	<th>Автор/Тема ресурса</th>
 	<th>Цена</th>
 	<th>Редактировать</th>
 	<th>Удалить</th>
@@ -32,7 +34,7 @@
 
 <c:forEach var="book" items="${list}">
 <tr><td>${book.id}</td>
-	<td>${book.title}</td>
+	<td><a href="${book.title}">${book.title}</a></td>
 	<td>${book.author}</td>
 	<td>${book.price}</td>
 	<td><a href="edit/${book.id}">редактировать ${book.id}</a></td>
